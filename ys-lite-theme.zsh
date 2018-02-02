@@ -6,7 +6,7 @@
 # Mar 2013 Yad Smood
 
 # VCS
-YS_VCS_PROMPT_PREFIX1=" %{$fg[black]%}on%{$reset_color%} "
+YS_VCS_PROMPT_PREFIX1=" %{$fg[white]%}on%{$reset_color%} "
 YS_VCS_PROMPT_PREFIX2=":%{$fg[cyan]%}"
 YS_VCS_PROMPT_SUFFIX="%{$reset_color%}"
 YS_VCS_PROMPT_DIRTY=" %{$fg[red]%}x"
@@ -39,22 +39,26 @@ local exit_code="%(?,,C:%{$fg[red]%}%?%{$reset_color%})"
 
 # Prompt format:
 #
-# PRIVILEGES USER @ MACHINE in DIRECTORY on git:BRANCH STATE [TIME] C:LAST_EXIT_CODE
+# PRIVILEGES USER @ MACHINE in DIRECTORY on git:BRANCH STATE  C:LAST_EXIT_CODE             [TIME]
 # $ COMMAND
 #
 # For example:
 #
-# % ys @ ys-mbp in ~/.oh-my-zsh on git:master x [21:47:42] C:0
+# % ys @ ys-mbp in ~/.oh-my-zsh on git:master x  C:0                                   [21:47:42]
 # $
-PROMPT="
+PROMPT="\
 %{$terminfo[bold]$fg[blue]%}#%{$reset_color%} \
-%(#,%{$bg[red]%}%{$fg[black]%}%n%{$reset_color%},%{$fg[cyan]%}%n) \
-%{$fg[black]%}@ \
+%(#,%{$bg[yellow]%}%{$fg[black]%}%n%{$reset_color%},%{$fg[cyan]%}%n) \
+%{$fg[white]%}@ \
 %{$fg[green]%}%m \
-%{$fg[black]%}in \
-%{$terminfo[bold]$fg[red]%}%~%{$reset_color%}\
+%{$fg[white]%}in \
+%{$terminfo[bold]$fg[yellow]%}%~%{$reset_color%}\
 ${hg_info}\
 ${git_info}\
  \
-%{$fg[black]%}[%*] $exit_code
-%{$terminfo[bold]$fg[red]%}$ %{$reset_color%}"
+$exit_code
+%{$terminfo[bold]$fg[cyan]%}> %{$reset_color%}"
+
+#echo the time stamp on the right site
+RPROMPT='%{$(echotc UP 1)%}%{$fg[white]%}[%*]%{$(echotc DO 1)%}'
+
